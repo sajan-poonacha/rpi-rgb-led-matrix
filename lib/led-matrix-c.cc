@@ -96,6 +96,7 @@ static struct RGBLedMatrix *led_matrix_create_from_options_optional_edit(
     // Same story as RGBMatrix::Options
 #define RT_OPT_COPY_IF_SET(o) if (rt_opts->o) default_rt.o = rt_opts->o
     RT_OPT_COPY_IF_SET(gpio_slowdown);
+    RT_OPT_COPY_IF_SET(rp1_pio);
     RT_OPT_COPY_IF_SET(daemon);
     RT_OPT_COPY_IF_SET(drop_privileges);
     RT_OPT_COPY_IF_SET(do_gpio_init);
@@ -142,6 +143,7 @@ static struct RGBLedMatrix *led_matrix_create_from_options_optional_edit(
   if (rt_opts) {
 #define ACTUAL_VALUE_BACK_TO_RT_OPT(o) rt_opts->o = runtime_opt.o
     ACTUAL_VALUE_BACK_TO_RT_OPT(gpio_slowdown);
+    ACTUAL_VALUE_BACK_TO_RT_OPT(rp1_pio);
     ACTUAL_VALUE_BACK_TO_RT_OPT(daemon);
     ACTUAL_VALUE_BACK_TO_RT_OPT(drop_privileges);
     ACTUAL_VALUE_BACK_TO_RT_OPT(do_gpio_init);
@@ -242,6 +244,9 @@ void led_canvas_fill(struct LedCanvas *canvas, uint8_t r, uint8_t g, uint8_t b) 
   to_canvas(canvas)->Fill(r, g, b);
 }
 
+void led_canvas_subfill(struct LedCanvas *canvas, int x, int y, int width, int height, uint8_t r, uint8_t g, uint8_t b) {
+  to_canvas(canvas)->SubFill(x, y, width, height, r, g, b);
+}
 struct LedFont *load_font(const char *bdf_font_file) {
   rgb_matrix::Font* font = new rgb_matrix::Font();
   font->LoadFont(bdf_font_file);
