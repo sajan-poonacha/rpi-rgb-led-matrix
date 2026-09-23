@@ -1,1 +1,1 @@
-sudo examples-api-use/demo --led-no-hardware-pulse --led-cols=64 --led-rows=64 --led-slowdown-gpio=5 -D0
+sudo examples-api-use/demo --led-no-hardware-pulse --led-cols=128 --led-rows=64 --led-slowdown-gpio=5 -D0
